@@ -1,12 +1,12 @@
 const express = require('express');
 
-const Projects = require('./resoures-model');
+const Resources = require('./resources-model');
 
 const router = express.Router();
 
-// find projects
+// find resources
 router.get('/', (req, res) => {
-	Projects.find()
+	Resources.find()
 		.then(resources => {
 			res.status(200).json(resources);
 		})
@@ -16,11 +16,11 @@ router.get('/', (req, res) => {
 		});
 });
 
-// find projects by id
+// find Resources by id
 router.get('/:id', (req, res) => {
 	const { id } = req.params;
 
-	Projects.findById(id)
+	Resources.findById(id)
 		.then(resource => {
 			res.status(200).json(resource);
 		})
@@ -30,11 +30,11 @@ router.get('/:id', (req, res) => {
 		});
 });
 
-// add projects
+// add Resources
 router.post('/', (req, res) => {
 	const resourceData = req.body;
 
-	Projects.add(resourceData)
+	Resources.add(resourceData)
 		.then(resource => {
 			res.status(200).json(resource);
 		})

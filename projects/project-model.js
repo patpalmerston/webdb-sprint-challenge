@@ -21,7 +21,7 @@ function findById(id) {
 function findByTask(id) {
 	return db('tasks as t')
 		.join('projects as p', 'p.id', 't.project_id')
-		.select('t.id', 't.description', 't.notes', 't.completed')
+		.select('t.id', 'p.project_name', 'p.project_description', 't.task_description', 't.notes', 't.completed')
 		.where('t.project_id', id);
 }
 

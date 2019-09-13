@@ -3,13 +3,13 @@ exports.up = function(knex, Promise) {
 		.createTable('projects', tbl => {
 			tbl.increments();
 			tbl.string('project_name', 128).notNullable();
-			tbl.string('description', 255);
+			tbl.string('project_description', 255);
 			tbl.boolean('completed').defaultTo(false);
 		})
 		.createTable('resources', tbl => {
 			tbl.increments();
 			tbl.string('resource_name').notNullable();
-			tbl.string('description');
+			tbl.string('resource_description');
 		})
 		.createTable('project_resources', tbl => {
 			tbl.increments();
@@ -44,7 +44,7 @@ exports.up = function(knex, Promise) {
 				.onUpdate('CASCADE')
 				.onDelete('CASCADE');
 
-			tbl.string('description', 255).notNullable();
+			tbl.string('task_description', 255).notNullable();
 			tbl.string('notes', 255);
 			tbl.boolean('completed').defaultTo(false);
 		});
