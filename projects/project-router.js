@@ -65,5 +65,18 @@ router.post('/', (req, res) => {
 });
 
 // add tasks by project id
+router.post('/:id/tasks', (req, res) => {
+	const taskData = req.body;
+
+	Projects.addTask(taskData)
+		.then(task => {
+			res.status(201).json(task);
+		})
+
+		.catch(err => {
+			console.log(err);
+			res.status(500).json({ message: 'failed to create new task' });
+		});
+});
 
 module.exports = router;

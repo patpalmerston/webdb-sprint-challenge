@@ -33,6 +33,10 @@ function add(project) {
 		});
 }
 
-function addTask() {
-	console.log('addTask');
+function addTask(task) {
+	return db('tasks')
+		.insert(task)
+		.then(ids => {
+			return findByTask(ids[0]);
+		});
 }
