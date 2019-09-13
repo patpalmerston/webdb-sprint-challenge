@@ -30,6 +30,26 @@ router.get('/:id', (req, res) => {
 		});
 });
 
+// find tasks by project id
+router.get('/:id/tasks', (req, res) => {
+	const { id } = req.params;
+
+	Projects.findByTask(id)
+		.then(tasks => {
+			if (tasks.length) {
+				res.status(200).json(tasks);
+			} else {
+				res
+					.status(404)
+					.json({ message: 'could not find the tasks for given project' });
+			}
+		})
+		.catch(err => {
+			console.log(err);
+			res.status(500).json({ error: 'unable to retrieve tasks' });
+		});
+});
+
 // add projects
 router.post('/', (req, res) => {
 	const projectData = req.body;
@@ -43,5 +63,7 @@ router.post('/', (req, res) => {
 			res.status(500).json({ error: 'unable to create project' });
 		});
 });
+
+// add tasks by project id
 
 module.exports = router;
