@@ -33,10 +33,11 @@ router.get('/:id', (req, res) => {
 // find tasks by project id
 router.get('/:id/tasks', (req, res) => {
 	const { id } = req.params;
+	const {completed} = req.body
 
 	Projects.findByTask(id)
 		.then(tasks => {
-			if (tasks.length) {
+			if (tasks.length ) {
 				res.status(200).json(tasks);
 			} else {
 				res
