@@ -33,23 +33,25 @@ router.get('/:id', (req, res) => {
 // find tasks by project id
 router.get('/:id/tasks', (req, res) => {
 	const { id } = req.params;
-	let {completed} = req.body
+	// let {completed} = req.body
 
 	Projects.findByTask(id)
 		.then(tasks => {
-			if(completed === 0){
-				completed = 'false'
-			} else {
-				completed = 'true'
-			}
+		console.log(tasks)
+		//option 1
 
-			if (tasks.length ) {
-				res.status(200).json(tasks);
-			} else {
-				res
-					.status(404)
-					.json({ message: 'could not find the tasks for given project' });
-			}
+		// const aTask = tasks.map(task => {
+		// 	return {...task, 'completed': task.completed === 1}
+		// })
+
+		//option 2
+
+		const aTask = {
+			...tasks,
+			completed: intToBoolean(tasks.completed)
+		}
+
+			res.status(200).json(aTask)
 		})
 		.catch(err => {
 			console.log(err);
